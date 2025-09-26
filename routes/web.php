@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 // 🔽 追加
-use App\Http\Controllers\TweetController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
