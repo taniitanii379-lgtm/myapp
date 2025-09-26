@@ -13,7 +13,7 @@ class EventController extends Controller
     public function index()
     {
     // 🔽 追加
-    $events = Event::with('user')->latest()->get();
+    $events = Event::all();
     return view('events.index', compact('events'));
     }
 
@@ -31,7 +31,30 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 🔽 イベントに必要なバリデーションルールに書き換え
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date|after:start_time',
+            'capacity' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'fee' => 'required|string|max:255',
+        ]);
+
+        // 🔽 データベースに保存する項目を、イベントのデータに書き換え
+        $request->user()->events()->create($request->only(
+            'title',
+            'description',
+            'start_time',
+            'end_time',
+            'capacity',
+            'location',
+            'fee'
+        ));
+
+        // 🔽 リダイレクト先をイベント一覧に設定
+        return redirect()->route('events.index');
     }
 
     /**
@@ -39,7 +62,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+    return view('events.show', compact('event'));
     }
 
     /**

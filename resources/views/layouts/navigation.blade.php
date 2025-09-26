@@ -16,10 +16,10 @@
             {{ __('Dashboard') }}
           </x-nav-link>
           <!-- 🔽 2項目追加 -->
-          <x-nav-link :href="route('events.index')" :active="request()->routeIs('event.index')">
+          <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
             {{ __('Event一覧') }}
           </x-nav-link>
-          <x-nav-link :href="route('events.create')" :active="request()->routeIs('event.create')">
+          <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
             {{ __('Event作成') }}
           </x-nav-link>
         </div>
