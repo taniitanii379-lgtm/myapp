@@ -32,4 +32,9 @@ protected $fillable = [
   {
     return $this->belongsTo(User::class);
   }    
+
+  public function joinedUsers()
+{
+    return $this->belongsToMany(User::class)->withTimestamps();
+}
 }
