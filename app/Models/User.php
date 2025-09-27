@@ -50,4 +50,9 @@ class User extends Authenticatable
   {
     return $this->hasMany(Event::class);
   }
+
+  public function joins()
+{
+    return $this->belongsToMany(Event::class)->withTimestamps();
+}
 }

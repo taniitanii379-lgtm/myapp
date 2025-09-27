@@ -35,6 +35,22 @@
             </form>
           </div>
           @endif
+
+          {{-- 🔽 参加ボタンのブロックを追加 --}}
+          <div class="flex mt-4">
+            @if ($event->joinedUsers->contains(auth()->id()))
+            <form action="{{ route('events.unjoin', $event) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="text-red-500 hover:text-red-700">参加中 ({{$event->joinedUsers->count()}})</button>
+            </form>
+            @else
+            <form action="{{ route('events.join', $event) }}" method="POST">
+              @csrf
+              <button type="submit" class="text-blue-500 hover:text-blue-700">参加する ({{$event->joinedUsers->count()}})</button>
+            </form>
+            @endif
+          </div>
         </div>
       </div>
     </div>
