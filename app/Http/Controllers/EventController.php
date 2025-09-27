@@ -59,10 +59,11 @@ public function index()
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
-    {
-    return view('events.show', compact('event'));
-    }
+public function show(Event $event)
+{
+  $event->load('comments'); // 🔽 コメントをロードする
+  return view('events.show', compact('event'));
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -102,5 +103,29 @@ public function update(Request $request, Event $event)
         $event->delete();
 
         return redirect()->route('events.index');
+    }
+
+        public function search(Request $request)
+    {
+        $query = Event::query();
+
+        // キーワードが指定されている場合のみ検索を実行
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+            // title, description, location を対象に検索
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', '%' . $keyword . '%')
+                  ->orWhere('description', 'like', '%' . $keyword . '%')
+                  ->orWhere('location', 'like', '%' . $keyword . '%');
+            });
+        }
+
+        // ページネーションを追加（1ページに10件表示）
+        $events = $query
+            ->with(['user', 'joinedUsers']) // ユーザー情報と参加者情報も取得
+            ->latest()
+            ->paginate(10);
+
+        return view('events.search', compact('events'));
     }
 }

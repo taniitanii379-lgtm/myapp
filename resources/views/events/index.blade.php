@@ -16,9 +16,12 @@
               @foreach ($events as $event)
                 <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
                   <h3 class="text-xl font-bold mb-2">{{ Str::upper($event->title) }}</h3>
-                  <p class="text-sm">
-                    <span class="font-semibold">開催者:</span> {{ $event->user->name }}
-                  </p>
+<p class="text-sm">
+  <span class="font-semibold">開催者:</span>
+  <a href="{{ route('profile.show', $event->user) }}" class="text-blue-500 hover:text-blue-700">
+    {{ $event->user->name }}
+  </a>
+</p>
                   <p class="text-sm">
                     <span class="font-semibold">開催場所:</span> {{ $event->location }}
                   </p>

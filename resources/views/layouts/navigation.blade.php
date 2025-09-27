@@ -22,6 +22,12 @@
           <x-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
             {{ __('Event作成') }}
           </x-nav-link>
+          <x-nav-link :href="route('events.search')" :active="request()->routeIs('events.search')">
+            {{ __('Event検索') }}
+          </x-nav-link>
+                    <x-nav-link :href="route('profile.show', auth()->user())" :active="request()->routeIs('profile.show')">
+            {{ __('マイページ') }}
+          </x-nav-link>
         </div>
       </div>
 
@@ -82,6 +88,12 @@
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('events.create')" :active="request()->routeIs('events.create')">
         {{ __('Event作成') }}
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('events.search')" :active="request()->routeIs('events.search')">
+        {{ __('Event検索') }}
+      </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('profile.show', auth()->user())" :active="request()->routeIs('profile.show')">
+        {{ __('マイページ') }}
       </x-responsive-nav-link>
     </div>
 
