@@ -37,4 +37,9 @@ protected $fillable = [
 {
     return $this->belongsToMany(User::class)->withTimestamps();
 }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+    }
+
 }

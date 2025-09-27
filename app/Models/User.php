@@ -55,4 +55,20 @@ class User extends Authenticatable
 {
     return $this->belongsToMany(Event::class)->withTimestamps();
 }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+        public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'follow_id');
+    }
+
+    // 🔽 フォロワーを取得 (誰が自分をフォローしているか)
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follow_id', 'follower_id');
+    }
 }
