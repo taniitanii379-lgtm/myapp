@@ -25,6 +25,8 @@
       "dest": "/public/index.php"
     }
   ],
+  "installCommand": "composer install",
+  "buildCommand": "php artisan migrate --force",
   "env": {
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
